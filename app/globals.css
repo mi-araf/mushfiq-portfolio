@@ -1,0 +1,112 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 230 24% 7%;
+  --foreground: 210 40% 98%;
+  --muted: 225 18% 14%;
+  --muted-foreground: 220 12% 68%;
+  --card: 225 20% 10%;
+  --border: 220 18% 22%;
+  --ring: 221 83% 62%;
+  --primary: 221 90% 64%;
+  --primary-foreground: 210 40% 98%;
+}
+
+.light {
+  --background: 220 36% 97%;
+  --foreground: 225 24% 9%;
+  --muted: 220 20% 92%;
+  --muted-foreground: 225 8% 39%;
+  --card: 0 0% 100%;
+  --border: 220 18% 84%;
+  --ring: 221 83% 53%;
+  --primary: 221 83% 53%;
+  --primary-foreground: 210 40% 98%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: auto;
+}
+
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: rgba(96, 165, 250, 0.32);
+  color: hsl(var(--foreground));
+}
+
+.noise {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+@layer components {
+  .section-padding {
+    @apply py-24 sm:py-28 lg:py-32;
+  }
+
+  .glass {
+    @apply border border-white/10 bg-white/[0.055] shadow-card backdrop-blur-2xl;
+  }
+
+  .light .glass {
+    @apply border-black/10 bg-white/70 shadow-[0_24px_80px_rgba(15,23,42,0.10)];
+  }
+
+  .text-gradient {
+    @apply bg-gradient-to-r from-white via-sky-200 to-violet-300 bg-clip-text text-transparent;
+  }
+
+  .light .text-gradient {
+    @apply from-slate-950 via-blue-700 to-violet-700;
+  }
+
+  .focus-ring {
+    @apply focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background;
+  }
+
+  .eyebrow {
+    @apply inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.06] px-4 py-2 text-xs font-medium uppercase tracking-[0.28em] text-muted-foreground backdrop-blur-xl;
+  }
+
+  .light .eyebrow {
+    @apply border-black/10 bg-white/80 text-slate-600;
+  }
+}
+
+.perspective-card {
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.tilt-content {
+  transform: translateZ(42px);
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
