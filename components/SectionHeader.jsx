@@ -11,7 +11,7 @@ export default function SectionHeader({ eyebrow, title, description, align = "ce
     return (
         <div
             data-gsap-reveal
-            className={`mx-auto mb-14 max-w-3xl ${isCenter ? "text-center" : "text-left"}`}
+            className={`mx-auto mb-14 max-w-4xl ${isCenter ? "text-center" : "text-left"}`}
         >
             <div className={`mb-5 flex ${isCenter ? "justify-center" : "justify-start"}`}>
                 <AnimatedEyebrow text={eyebrowText} />

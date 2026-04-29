@@ -8,10 +8,11 @@ import { ArrowRight, Sparkles, FileText, ArrowUpRight } from "lucide-react";
 import MagneticButton from "@/components/MagneticButton";
 import { Button } from "@/components/ui/button";
 
-
 const Scene = dynamic(() => import("@/components/Scene"), {
     ssr: false,
-    loading: () => <div className="h-[300px] w-full sm:h-[440px] lg:h-[500px]" />
+    loading: () => (
+        <div className="h-[300px] w-full sm:h-[440px] lg:h-[500px]" />
+    )
 });
 
 const introItems = [
@@ -112,12 +113,10 @@ function TypingRole() {
 
     return (
         <span className="relative inline-flex h-4 min-w-[14.5rem] items-center leading-none sm:min-w-[17rem]">
-            {/* Keeps the box size stable */}
             <span className="invisible pointer-events-none select-none">
                 {longestRole}
             </span>
 
-            {/* Actual typing text */}
             <span className="absolute left-0 top-1/2 inline-flex -translate-y-1/2 items-center whitespace-nowrap">
                 <span>{visibleText || "\u00A0"}</span>
 
@@ -174,7 +173,8 @@ export default function Hero() {
 
             setFloatingItems((items) => {
                 const nextItems = [...items];
-                const [firstIndex, secondIndex] = swapPairs[swapStepRef.current % swapPairs.length];
+                const [firstIndex, secondIndex] =
+                    swapPairs[swapStepRef.current % swapPairs.length];
 
                 [nextItems[firstIndex], nextItems[secondIndex]] = [
                     nextItems[secondIndex],
@@ -237,7 +237,9 @@ export default function Hero() {
                         </span>
 
                         <span className="block overflow-hidden pb-2">
-                            <span className="hero-word inline-block text-gradient">Iqbal Araf</span>
+                            <span className="hero-word inline-block text-gradient">
+                                Iqbal Araf
+                            </span>
                         </span>
                     </h1>
 
@@ -248,8 +250,8 @@ export default function Hero() {
                         className="mt-6 max-w-xl text-base leading-7 text-muted-foreground sm:text-lg sm:leading-8 [.light_&]:text-slate-600"
                     >
                         A full-stack developer focused on building modern, responsive, and
-                        interactive web experiences while continuously learning, improving, and turning ideas into real
-                        digital products.
+                        interactive web experiences while continuously learning, improving, and
+                        turning ideas into real digital products.
                     </motion.p>
 
                     <motion.div
@@ -308,16 +310,15 @@ export default function Hero() {
                 >
                     <div className="absolute left-1/2 top-1/2 h-[54%] w-[54%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-violet-500/18 blur-3xl [.light_&]:bg-violet-400/12" />
 
-                    <div className="relative mx-auto h-[280px] w-full max-w-[360px] sm:h-[420px] sm:max-w-[500px] lg:h-[500px] lg:max-w-[560px] xl:h-[540px] xl:max-w-[600px] [&>*]:!h-full [&>*]:!w-full">
+                    <div className="relative isolate mx-auto h-[280px] w-full max-w-[360px] sm:h-[420px] sm:max-w-[500px] lg:h-[500px] lg:max-w-[560px] xl:h-[540px] xl:max-w-[600px] [&>*]:!h-full [&>*]:!w-full">
                         <Scene />
                     </div>
                 </motion.div>
 
-                {/* Mobile intro item: after image, instant spawn */}
                 <motion.div
                     initial={{ opacity: 1, y: 0 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className="order-3 -mt-2 sm:hidden mb-2"
+                    className="order-3 -mt-2 mb-2 sm:hidden"
                 >
                     <AnimatePresence mode="wait" initial={false}>
                         <motion.div
@@ -383,14 +384,16 @@ export default function Hero() {
                     </AnimatePresence>
                 </motion.div>
 
-                {/* Desktop intro items */}
                 <motion.div
                     initial={{ opacity: 0, y: 18 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8, delay: 0.95, ease: "easeOut" }}
-                    className="relative z-10 hidden sm:block lg:col-span-2 mt-3 mb-4"
+                    className="relative z-10 mt-3 mb-4 hidden sm:block lg:col-span-2"
                 >
-                    <motion.div layout className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4">
+                    <motion.div
+                        layout
+                        className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4"
+                    >
                         {floatingItems.map((item, index) => (
                             <motion.div
                                 layout
@@ -399,8 +402,14 @@ export default function Hero() {
                                 animate={{
                                     opacity: 1,
                                     scale: 1,
-                                    y: index % 2 === 0 ? [0, -5, 0, 4, 0] : [0, 4, 0, -5, 0],
-                                    x: index % 3 === 0 ? [0, 4, 0, -3, 0] : [0, -3, 0, 4, 0],
+                                    y:
+                                        index % 2 === 0
+                                            ? [0, -5, 0, 4, 0]
+                                            : [0, 4, 0, -5, 0],
+                                    x:
+                                        index % 3 === 0
+                                            ? [0, 4, 0, -3, 0]
+                                            : [0, -3, 0, 4, 0],
                                     rotate:
                                         index % 2 === 0
                                             ? [0, 0.7, 0, -0.7, 0]
@@ -478,7 +487,6 @@ export default function Hero() {
                     </motion.div>
                 </motion.div>
             </div>
-
         </section>
     );
 }
