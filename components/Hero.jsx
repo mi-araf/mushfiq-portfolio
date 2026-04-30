@@ -185,7 +185,7 @@ export default function Hero() {
 
                 return nextItems;
             });
-        }, 1200);
+        }, 3500);
 
         return () => window.clearInterval(interval);
     }, []);
@@ -331,55 +331,23 @@ export default function Hero() {
                                 y: { duration: 0.18 },
                                 scale: { duration: 0.18 }
                             }}
-                            whileDrag={{ scale: 1.04, rotate: 1.2 }}
-                            drag
-                            dragMomentum={false}
-                            dragElastic={0.24}
-                            dragConstraints={{
-                                top: -18,
-                                bottom: 18,
-                                left: -22,
-                                right: 22
-                            }}
-                            className="group relative mx-auto max-w-[310px] cursor-grab rounded-[1.25rem] bg-gradient-to-br from-sky-400/30 via-white/20 to-violet-500/25 p-[1px] shadow-[0_12px_34px_rgba(15,23,42,0.10)] active:cursor-grabbing [.light_&]:from-sky-500/20 [.light_&]:via-slate-200/80 [.light_&]:to-violet-500/20"
+                            className="group relative mx-auto max-w-[310px] rounded-[1.35rem] bg-gradient-to-br from-sky-400/25 via-white/15 to-violet-500/20 p-[1px] shadow-[0_10px_30px_rgba(15,23,42,0.10)] [.light_&]:from-sky-500/18 [.light_&]:via-slate-200/80 [.light_&]:to-violet-500/18"
                         >
-                            <motion.div
-                                animate={{
-                                    y: [0, -3, 0],
-                                    x: [0, 2, 0],
-                                    rotate: [0, 0.35, 0]
-                                }}
-                                transition={{
-                                    y: {
-                                        duration: 1.25,
-                                        repeat: Infinity,
-                                        ease: "easeInOut"
-                                    },
-                                    x: {
-                                        duration: 1.4,
-                                        repeat: Infinity,
-                                        ease: "easeInOut"
-                                    },
-                                    rotate: {
-                                        duration: 1.5,
-                                        repeat: Infinity,
-                                        ease: "easeInOut"
-                                    }
-                                }}
-                                className="relative overflow-hidden rounded-[1.18rem] bg-slate-900/70 px-4 py-3 text-left backdrop-blur-xl [.light_&]:bg-white/92"
-                            >
-                                <span className="pointer-events-none absolute inset-0 bg-gradient-to-br from-sky-400/10 via-violet-400/8 to-transparent [.light_&]:from-sky-500/8 [.light_&]:via-violet-500/8" />
+                            <div className="relative overflow-hidden rounded-[1.28rem] bg-slate-900/70 px-4 py-3 text-left backdrop-blur-xl transition-colors duration-300 group-hover:bg-slate-900/78 [.light_&]:bg-white [.light_&]:group-hover:bg-white">
+                                <span className="pointer-events-none absolute inset-0 bg-gradient-to-br from-sky-400/8 via-violet-400/8 to-transparent opacity-80 [.light_&]:from-sky-500/8 [.light_&]:via-violet-500/8" />
 
-                                <span className="pointer-events-none absolute -right-8 -top-8 h-20 w-20 rounded-full bg-sky-400/10 blur-2xl [.light_&]:bg-sky-500/10" />
+                                <span className="pointer-events-none absolute -right-8 -top-8 h-20 w-20 rounded-full bg-sky-400/10 blur-2xl transition duration-300 group-hover:bg-violet-400/18 [.light_&]:bg-sky-500/10" />
 
-                                <h3 className="relative text-sm font-semibold text-white [.light_&]:text-slate-900">
+                                <span className="pointer-events-none absolute bottom-0 left-4 right-4 h-px bg-gradient-to-r from-transparent via-sky-300/45 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100 [.light_&]:via-sky-500/35" />
+
+                                <h3 className="relative text-sm font-semibold text-white [.light_&]:text-slate-950">
                                     {activeIntroItem.label}
                                 </h3>
 
-                                <p className="relative mt-1 text-xs leading-5 text-slate-300 [.light_&]:text-slate-600">
+                                <p className="relative mt-1 text-xs font-medium leading-5 text-slate-300 [.light_&]:text-slate-700">
                                     {activeIntroItem.detail}
                                 </p>
-                            </motion.div>
+                            </div>
                         </motion.div>
                     </AnimatePresence>
                 </motion.div>
@@ -456,18 +424,9 @@ export default function Hero() {
                                     zIndex: 50
                                 }}
                                 whileTap={{ scale: 0.98 }}
-                                drag
-                                dragMomentum={false}
-                                dragElastic={0.28}
-                                dragConstraints={{
-                                    top: -24,
-                                    bottom: 24,
-                                    left: -28,
-                                    right: 28
-                                }}
                                 className="group relative cursor-grab rounded-[1.35rem] bg-gradient-to-br from-sky-400/25 via-white/15 to-violet-500/20 p-[1px] shadow-[0_10px_30px_rgba(15,23,42,0.10)] transition-shadow duration-300 hover:shadow-[0_18px_45px_rgba(56,189,248,0.12)] active:cursor-grabbing [.light_&]:from-sky-500/18 [.light_&]:via-slate-200/80 [.light_&]:to-violet-500/18"
                             >
-                                <div className="relative overflow-hidden rounded-[1.28rem] bg-slate-900/70 px-4 py-3 text-left backdrop-blur-xl transition-colors duration-300 group-hover:bg-slate-900/78 [.light_&]:bg-white/92 [.light_&]:group-hover:bg-white">
+                                <div className="relative overflow-hidden rounded-[1.28rem] bg-slate-900/70 px-4 py-3 text-left backdrop-blur-xl transition-colors duration-300 group-hover:bg-slate-900/78 [.light_&]:bg-white [.light_&]:group-hover:bg-white">
                                     <span className="pointer-events-none absolute inset-0 bg-gradient-to-br from-sky-400/8 via-violet-400/8 to-transparent opacity-80 [.light_&]:from-sky-500/8 [.light_&]:via-violet-500/8" />
 
                                     <span className="pointer-events-none absolute -right-8 -top-8 h-20 w-20 rounded-full bg-sky-400/10 blur-2xl transition duration-300 group-hover:bg-violet-400/18 [.light_&]:bg-sky-500/10" />

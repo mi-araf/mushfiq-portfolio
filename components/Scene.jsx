@@ -562,13 +562,13 @@ function SceneContent() {
             />
 
             <Stars
-                radius={50}
-                depth={38}
-                count={1200}
-                factor={3}
+                radius={45}
+                depth={30}
+                count={450}
+                factor={2.4}
                 saturation={0}
                 fade
-                speed={0.55}
+                speed={0.25}
             />
 
             <Float speed={1.25} rotationIntensity={0.18} floatIntensity={0.18}>
@@ -586,7 +586,7 @@ function SceneContent() {
                 enableDamping
                 dampingFactor={0.08}
                 autoRotate
-                autoRotateSpeed={0.38}
+                autoRotateSpeed={0.18}
                 minPolarAngle={Math.PI / 3}
                 maxPolarAngle={Math.PI / 1.6}
             />
@@ -598,8 +598,8 @@ export default function Scene() {
     return (
         <Canvas
             camera={{ position: [0, 0.15, 6.5], fov: 42 }}
-            dpr={[1, 2]}
-            gl={{ antialias: true, alpha: true }}
+            dpr={[1, 1.35]}
+            gl={{ antialias: false, alpha: true, powerPreference: "high-performance" }}
         >
             <SceneContent />
         </Canvas>

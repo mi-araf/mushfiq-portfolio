@@ -258,7 +258,7 @@ export default function Navbar() {
                     <motion.span
                         whileHover={{ x: 2 }}
                         transition={hoverTransition}
-                        className="hidden text-lg font-bold tracking-wide text-white transition duration-300 group-hover/logo:text-sky-200 sm:block [.light_&]:text-slate-900 [.light_&]:group-hover/logo:text-sky-700"
+                        className="block text-lg font-bold tracking-wide text-white transition duration-300 group-hover/logo:text-sky-200 sm:text-lg [.light_&]:text-slate-900 [.light_&]:group-hover/logo:text-sky-700"
                     >
                         Araf
                     </motion.span>

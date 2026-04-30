@@ -57,8 +57,9 @@ function TechBadge({ tech }) {
     );
 }
 
-function ProjectImageSlider({ images, name, index, slug }) {
+function ProjectImageSlider({ images, name, slug }) {
     const [activeImage, setActiveImage] = useState(0);
+    const [isHovered, setIsHovered] = useState(false);
 
     const projectKey = `${slug || ""} ${name || ""}`.toLowerCase();
 
@@ -67,75 +68,64 @@ function ProjectImageSlider({ images, name, index, slug }) {
         (projectKey.includes("github") && projectKey.includes("issue"));
 
     useEffect(() => {
-        if (!images || images.length <= 1) return;
+        if (!isHovered || !images || images.length <= 1) return;
 
         const interval = setInterval(() => {
             setActiveImage((current) => (current + 1) % images.length);
-        }, 2800 + index * 350);
+        }, 1800);
 
         return () => clearInterval(interval);
-    }, [images, index]);
+    }, [isHovered, images]);
+
+    if (!images || images.length === 0) {
+        return null;
+    }
 
     return (
         <div
-            className={`group/image relative overflow-hidden rounded-[1.35rem] border border-white/10 [.light_&]:border-slate-200 ${
-                shouldCenterFullScreenshot
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => {
+                setIsHovered(false);
+                setActiveImage(0);
+            }}
+            className={`group/image relative overflow-hidden rounded-[1.35rem] border border-white/10 [.light_&]:border-slate-200 ${shouldCenterFullScreenshot
                     ? "h-[250px] bg-slate-950/45 p-3 sm:h-[300px] sm:p-4 lg:h-[340px] [.light_&]:bg-slate-100"
                     : "h-64 bg-slate-950/70 sm:h-80 lg:h-full lg:min-h-[430px] [.light_&]:bg-slate-100"
-            }`}
+                }`}
         >
             {shouldCenterFullScreenshot ? (
                 <div className="relative h-full w-full overflow-hidden rounded-[1.1rem] bg-[radial-gradient(circle_at_20%_20%,rgba(56,189,248,0.10),transparent_28%),radial-gradient(circle_at_80%_80%,rgba(168,85,247,0.10),transparent_30%)] [.light_&]:bg-[radial-gradient(circle_at_20%_20%,rgba(14,165,233,0.08),transparent_28%),radial-gradient(circle_at_80%_80%,rgba(124,58,237,0.08),transparent_30%)]">
                     <div className="absolute left-1/2 top-1/2 aspect-[16/9] w-[86%] max-w-[640px] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-[1rem] border border-white/12 bg-white shadow-[0_14px_35px_rgba(0,0,0,0.22)] transition duration-500 group-hover/image:scale-[1.015] [.light_&]:border-slate-200 [.light_&]:shadow-[0_12px_28px_rgba(15,23,42,0.10)]">
-                        {images.map((image, imageIndex) => {
-                            const isActive = activeImage === imageIndex;
-
-                            return (
-                                <Image
-                                    key={image}
-                                    src={image}
-                                    alt={`${name} preview ${imageIndex + 1}`}
-                                    fill
-                                    sizes="(max-width: 1024px) 100vw, 50vw"
-                                    className={`absolute inset-0 object-contain object-center transition-all duration-700 ease-out ${
-                                        isActive
-                                            ? "scale-100 opacity-100"
-                                            : "scale-[1.01] opacity-0"
-                                    }`}
-                                />
-                            );
-                        })}
+                        <Image
+                            key={images[activeImage]}
+                            src={images[activeImage]}
+                            alt={`${name} preview ${activeImage + 1}`}
+                            fill
+                            sizes="(max-width: 1024px) 100vw, 50vw"
+                            quality={65}
+                            className="absolute inset-0 object-contain object-center transition-all duration-500 ease-out"
+                        />
                     </div>
                 </div>
             ) : (
                 <div className="relative h-full w-full overflow-hidden rounded-[1.05rem]">
-                    {images.map((image, imageIndex) => {
-                        const isActive = activeImage === imageIndex;
-
-                        return (
-                            <Image
-                                key={image}
-                                src={image}
-                                alt={`${name} preview ${imageIndex + 1}`}
-                                fill
-                                sizes="(max-width: 1024px) 100vw, 50vw"
-                                className={`absolute inset-0 object-cover object-top transition-all duration-700 ease-out ${
-                                    isActive
-                                        ? "scale-100 opacity-100"
-                                        : "scale-[1.03] opacity-0"
-                                } group-hover/image:scale-[1.08] group-hover/image:rotate-[0.35deg]`}
-                            />
-                        );
-                    })}
+                    <Image
+                        key={images[activeImage]}
+                        src={images[activeImage]}
+                        alt={`${name} preview ${activeImage + 1}`}
+                        fill
+                        sizes="(max-width: 1024px) 100vw, 50vw"
+                        quality={65}
+                        className="absolute inset-0 object-cover object-top transition-all duration-500 ease-out group-hover/image:scale-[1.04]"
+                    />
                 </div>
             )}
 
             <div
-                className={`pointer-events-none absolute inset-0 transition duration-500 ${
-                    shouldCenterFullScreenshot
+                className={`pointer-events-none absolute inset-0 transition duration-500 ${shouldCenterFullScreenshot
                         ? "bg-gradient-to-t from-slate-950/18 via-transparent to-transparent [.light_&]:from-white/10"
                         : "bg-gradient-to-t from-slate-950/65 via-slate-950/5 to-transparent group-hover/image:from-slate-950/50 [.light_&]:from-white/40"
-                }`}
+                    }`}
             />
 
             <div className="pointer-events-none absolute inset-0 opacity-0 transition duration-500 group-hover/image:opacity-100">
@@ -145,18 +135,17 @@ function ProjectImageSlider({ images, name, index, slug }) {
             <div className="absolute bottom-4 left-4 right-4 z-20 flex items-center justify-between gap-3">
                 <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-black/35 px-3 py-1.5 text-xs font-medium text-white/80 backdrop-blur-xl [.light_&]:border-slate-200 [.light_&]:bg-white/80 [.light_&]:text-slate-700">
                     <Sparkles className="h-3.5 w-3.5 text-sky-300 [.light_&]:text-sky-600" />
-                    Auto preview
+                    Hover preview
                 </div>
 
                 <div className="flex items-center gap-1.5">
                     {images.map((image, dotIndex) => (
                         <span
                             key={image}
-                            className={`h-1.5 rounded-full transition-all duration-300 ${
-                                activeImage === dotIndex
+                            className={`h-1.5 rounded-full transition-all duration-300 ${activeImage === dotIndex
                                     ? "w-5 bg-sky-300 [.light_&]:bg-sky-600"
                                     : "w-1.5 bg-white/35 [.light_&]:bg-slate-300"
-                            }`}
+                                }`}
                         />
                     ))}
                 </div>
@@ -205,15 +194,13 @@ function ProjectCard({ project, index }) {
                         <ProjectImageSlider
                             images={project.images}
                             name={project.name}
-                            index={index}
                             slug={project.slug}
                         />
                     </div>
 
                     <div
-                        className={`flex flex-col justify-center p-2 sm:p-5 lg:p-7 ${
-                            isReversed ? "lg:order-1" : ""
-                        }`}
+                        className={`flex flex-col justify-center p-2 sm:p-5 lg:p-7 ${isReversed ? "lg:order-1" : ""
+                            }`}
                     >
                         <div className="mb-4 flex flex-wrap items-center gap-3">
                             <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.05] px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-sky-200 [.light_&]:border-slate-200 [.light_&]:bg-sky-50 [.light_&]:text-sky-700">

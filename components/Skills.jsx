@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import {
     BadgeCheck,
@@ -268,9 +268,7 @@ function CategoryButton({ group, isActive, onClick }) {
             className="group/category relative"
         >
             <span
-                className={`pointer-events-none absolute -inset-[2px] rounded-full blur-lg transition duration-500 ${isActive
-                    ? "opacity-100"
-                    : "opacity-0 group-hover/category:opacity-90"
+                className={`pointer-events-none absolute -inset-[2px] rounded-full blur-lg transition duration-500 ${isActive ? "opacity-100" : "opacity-0 group-hover/category:opacity-90"
                     }`}
                 style={{
                     background: isActive
@@ -281,21 +279,21 @@ function CategoryButton({ group, isActive, onClick }) {
 
             <span
                 className={`absolute inset-0 rounded-full transition duration-500 ${isActive
-                    ? "border border-sky-400/70 shadow-[0_0_0_1px_rgba(56,189,248,0.16),0_0_30px_rgba(56,189,248,0.20)]"
-                    : "border border-transparent"
+                        ? "border border-sky-400/70 shadow-[0_0_0_1px_rgba(56,189,248,0.16),0_0_30px_rgba(56,189,248,0.20)]"
+                        : "border border-transparent"
                     }`}
             />
 
             <span
                 className={`relative inline-flex shrink-0 items-center gap-2 rounded-full border px-4 py-2.5 text-sm font-semibold transition duration-300 ${isActive
-                    ? "border-sky-300/70 bg-sky-400/15 text-sky-100 [.light_&]:border-sky-300/80 [.light_&]:bg-[linear-gradient(135deg,rgba(240,249,255,0.9),rgba(245,243,255,0.82))] [.light_&]:text-sky-700 [.light_&]:shadow-[0_10px_28px_rgba(14,165,233,0.14)]"
-                    : "border-white/10 bg-white/[0.04] text-slate-300 hover:border-sky-400/40 hover:bg-sky-400/10 hover:text-sky-100 [.light_&]:border-slate-200/90 [.light_&]:bg-white/70 [.light_&]:text-slate-600 [.light_&]:shadow-[0_6px_18px_rgba(30,41,59,0.05)] [.light_&]:backdrop-blur-xl [.light_&]:hover:border-sky-300/80 [.light_&]:hover:bg-sky-50/80 [.light_&]:hover:text-sky-700"
+                        ? "border-sky-300/70 bg-sky-400/15 text-sky-100 [.light_&]:border-sky-300/80 [.light_&]:bg-[linear-gradient(135deg,rgba(240,249,255,0.9),rgba(245,243,255,0.82))] [.light_&]:text-sky-700 [.light_&]:shadow-[0_10px_28px_rgba(14,165,233,0.14)]"
+                        : "border-white/10 bg-white/[0.04] text-slate-300 hover:border-sky-400/40 hover:bg-sky-400/10 hover:text-sky-100 [.light_&]:border-slate-200/90 [.light_&]:bg-white/70 [.light_&]:text-slate-600 [.light_&]:shadow-[0_6px_18px_rgba(30,41,59,0.05)] [.light_&]:backdrop-blur-xl [.light_&]:hover:border-sky-300/80 [.light_&]:hover:bg-sky-50/80 [.light_&]:hover:text-sky-700"
                     }`}
             >
                 <GroupIcon
                     className={`h-4 w-4 transition duration-300 ${isActive
-                        ? "text-sky-300 [.light_&]:text-sky-600"
-                        : "text-slate-400 group-hover/category:text-sky-300 [.light_&]:text-slate-500 [.light_&]:group-hover/category:text-sky-700"
+                            ? "text-sky-300 [.light_&]:text-sky-600"
+                            : "text-slate-400 group-hover/category:text-sky-300 [.light_&]:text-slate-500 [.light_&]:group-hover/category:text-sky-700"
                         }`}
                     aria-hidden="true"
                 />
@@ -503,19 +501,15 @@ function EducationCard() {
             }}
             className="group/education relative mx-auto mt-12 max-w-5xl"
         >
-            {/* Outer glow */}
             <span className="pointer-events-none absolute -inset-[2px] rounded-[2rem] bg-[conic-gradient(from_180deg_at_50%_50%,rgba(56,189,248,0.45),rgba(168,85,247,0.34),rgba(14,165,233,0.36),rgba(56,189,248,0.45))] opacity-0 blur-2xl transition duration-700 group-hover/education:opacity-80 [.light_&]:bg-[conic-gradient(from_180deg_at_50%_50%,rgba(14,165,233,0.28),rgba(124,58,237,0.20),rgba(59,130,246,0.24),rgba(14,165,233,0.28))] [.light_&]:group-hover/education:opacity-75" />
 
             <Card className="relative overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.045] shadow-[0_20px_70px_rgba(15,23,42,0.14)] transition-all duration-500 group-hover/education:border-sky-300/45 group-hover/education:bg-sky-400/[0.055] group-hover/education:shadow-[0_28px_90px_rgba(56,189,248,0.16)] [.light_&]:border-slate-200/90 [.light_&]:bg-[linear-gradient(145deg,rgba(255,255,255,0.88),rgba(248,250,252,0.76),rgba(245,243,255,0.52))] [.light_&]:shadow-[0_24px_70px_rgba(30,41,59,0.10)] [.light_&]:backdrop-blur-2xl [.light_&]:group-hover/education:border-sky-300/70 [.light_&]:group-hover/education:shadow-[0_30px_85px_rgba(14,165,233,0.16)]">
-                {/* Soft background */}
                 <span className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_18%_18%,rgba(56,189,248,0.14),transparent_32%),radial-gradient(circle_at_90%_88%,rgba(168,85,247,0.12),transparent_36%)] transition duration-500 [.light_&]:bg-[radial-gradient(circle_at_18%_18%,rgba(14,165,233,0.11),transparent_32%),radial-gradient(circle_at_90%_88%,rgba(168,85,247,0.10),transparent_36%),linear-gradient(180deg,rgba(255,255,255,0.28),transparent)]" />
 
-                {/* Moving shine */}
                 <span className="pointer-events-none absolute -left-28 top-0 h-full w-20 rotate-12 bg-white/10 blur-md transition-transform duration-1000 group-hover/education:translate-x-[780px] [.light_&]:bg-white/80" />
 
                 <CardContent className="relative p-5 sm:p-7 lg:p-8">
                     <div className="grid gap-6 md:grid-cols-[auto_1fr_auto] md:items-center">
-                        {/* Animated icon badge */}
                         <div className="relative mx-auto md:mx-0">
                             <motion.span
                                 aria-hidden="true"
@@ -549,7 +543,6 @@ function EducationCard() {
                             />
                         </div>
 
-                        {/* Text */}
                         <div className="text-center md:text-left">
                             <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.05] px-3 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-sky-200 [.light_&]:border-slate-200/90 [.light_&]:bg-white/70 [.light_&]:text-sky-700 [.light_&]:backdrop-blur-xl">
                                 <BookOpen
@@ -591,7 +584,6 @@ function EducationCard() {
                             </div>
                         </div>
 
-                        {/* Right status badge */}
                         <div className="mx-auto w-full max-w-[220px] rounded-3xl border border-white/10 bg-white/[0.05] p-4 text-center shadow-[0_12px_36px_rgba(15,23,42,0.10)] backdrop-blur-xl md:mx-0 [.light_&]:border-slate-200/90 [.light_&]:bg-white/75 [.light_&]:shadow-[0_14px_34px_rgba(30,41,59,0.08)]">
                             <span className="text-xs font-semibold uppercase tracking-[0.22em] text-slate-400 [.light_&]:text-slate-500">
                                 Degree
@@ -616,10 +608,8 @@ function EducationCard() {
     );
 }
 
-
 export default function Skills() {
     const [activeGroupId, setActiveGroupId] = useState(skillGroups[0].id);
-    const [isPaused, setIsPaused] = useState(false);
 
     const activeGroup = useMemo(() => {
         return (
@@ -629,22 +619,6 @@ export default function Skills() {
     }, [activeGroupId]);
 
     const ActiveBadgeIcon = activeGroup.icon || Boxes;
-
-    useEffect(() => {
-        if (isPaused) return undefined;
-
-        const interval = window.setInterval(() => {
-            setActiveGroupId((currentId) => {
-                const currentIndex = skillGroups.findIndex(
-                    (group) => group.id === currentId
-                );
-                const nextIndex = (currentIndex + 1) % skillGroups.length;
-                return skillGroups[nextIndex].id;
-            });
-        }, 4200);
-
-        return () => window.clearInterval(interval);
-    }, [isPaused]);
 
     return (
         <section id="skills" className="section-padding relative overflow-hidden">
@@ -664,11 +638,7 @@ export default function Skills() {
                     description="My skill set is built around modern web development, clean UI design, smooth motion, deployment, and practical full-stack learning."
                 />
 
-                <div
-                    onMouseEnter={() => setIsPaused(true)}
-                    onMouseLeave={() => setIsPaused(false)}
-                    className="space-y-7"
-                >
+                <div className="space-y-7">
                     <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-center gap-3 px-2">
                         {skillGroups.map((group) => (
                             <CategoryButton
@@ -764,7 +734,6 @@ export default function Skills() {
 
                 <br />
                 <EducationCard />
-
             </div>
         </section>
     );
