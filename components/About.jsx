@@ -151,30 +151,32 @@ function HighlightCard({ icon: Icon, label, value, index }) {
             className="group relative h-full"
         >
             {/* Outer glow */}
-            <span className="pointer-events-none absolute -inset-[1px] rounded-[1.85rem] bg-[conic-gradient(from_180deg_at_50%_50%,rgba(56,189,248,0.55),rgba(168,85,247,0.38),rgba(14,165,233,0.45),rgba(56,189,248,0.55))] opacity-0 blur-xl transition duration-500 group-hover:opacity-80 [.light_&]:bg-[conic-gradient(from_180deg_at_50%_50%,rgba(14,165,233,0.42),rgba(124,58,237,0.32),rgba(59,130,246,0.36),rgba(14,165,233,0.42))] [.light_&]:group-hover:opacity-80" />
+            <span className="pointer-events-none absolute -inset-[1px] rounded-[1.25rem] bg-[conic-gradient(from_180deg_at_50%_50%,rgba(56,189,248,0.55),rgba(168,85,247,0.38),rgba(14,165,233,0.45),rgba(56,189,248,0.55))] opacity-0 blur-xl transition duration-500 group-hover:opacity-80 sm:rounded-[1.85rem] [.light_&]:bg-[conic-gradient(from_180deg_at_50%_50%,rgba(14,165,233,0.42),rgba(124,58,237,0.32),rgba(59,130,246,0.36),rgba(14,165,233,0.42))] [.light_&]:group-hover:opacity-80" />
 
-            <Card className="relative h-full overflow-hidden rounded-[1.8rem] border border-white/10 bg-white/[0.045] shadow-[0_18px_55px_rgba(15,23,42,0.12)] transition-all duration-500 hover:border-sky-300/45 hover:bg-sky-400/[0.065] hover:shadow-[0_28px_80px_rgba(56,189,248,0.18)] sm:rounded-[2rem] [.light_&]:border-slate-200/90 [.light_&]:bg-white/95 [.light_&]:shadow-[0_18px_50px_rgba(15,23,42,0.08)] [.light_&]:hover:border-sky-400/70 [.light_&]:hover:bg-[linear-gradient(135deg,rgba(240,249,255,0.98),rgba(245,243,255,0.96))] [.light_&]:hover:shadow-[0_24px_70px_rgba(14,165,233,0.22)]">
+            <Card className="relative h-full overflow-hidden rounded-[1.2rem] border border-white/10 bg-white/[0.045] shadow-[0_18px_55px_rgba(15,23,42,0.12)] transition-all duration-500 hover:border-sky-300/45 hover:bg-sky-400/[0.065] hover:shadow-[0_28px_80px_rgba(56,189,248,0.18)] sm:rounded-[2rem] [.light_&]:border-slate-200/90 [.light_&]:bg-white/95 [.light_&]:shadow-[0_18px_50px_rgba(15,23,42,0.08)] [.light_&]:hover:border-sky-400/70 [.light_&]:hover:bg-[linear-gradient(135deg,rgba(240,249,255,0.98),rgba(245,243,255,0.96))] [.light_&]:hover:shadow-[0_24px_70px_rgba(14,165,233,0.22)]">
                 {/* Inner glow */}
                 <span className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_35%_15%,rgba(56,189,248,0.18),transparent_34%),radial-gradient(circle_at_85%_90%,rgba(168,85,247,0.16),transparent_36%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100 [.light_&]:bg-[radial-gradient(circle_at_35%_15%,rgba(14,165,233,0.20),transparent_36%),radial-gradient(circle_at_85%_90%,rgba(124,58,237,0.16),transparent_38%)]" />
 
                 {/* Moving shine */}
                 <span className="pointer-events-none absolute -left-24 top-0 h-full w-20 rotate-12 bg-white/10 blur-md transition-transform duration-700 group-hover:translate-x-[360px] [.light_&]:bg-white/80" />
 
-                <CardContent className="relative p-5 sm:p-6">
-                    <div className="mb-5 grid h-12 w-12 place-items-center rounded-2xl border border-white/10 bg-white/[0.08] text-sky-200 shadow-[0_10px_30px_rgba(56,189,248,0.08)] transition duration-500 group-hover:scale-110 group-hover:rotate-3 group-hover:border-sky-300/40 group-hover:bg-sky-400/15 group-hover:text-sky-100 [.light_&]:border-sky-200/80 [.light_&]:bg-[linear-gradient(135deg,rgba(224,242,254,0.95),rgba(237,233,254,0.92))] [.light_&]:text-sky-700 [.light_&]:shadow-[0_12px_30px_rgba(14,165,233,0.16)] [.light_&]:group-hover:border-violet-300/80 [.light_&]:group-hover:bg-[linear-gradient(135deg,rgba(219,234,254,1),rgba(237,233,254,1))] [.light_&]:group-hover:text-violet-700 [.light_&]:group-hover:shadow-[0_16px_38px_rgba(124,58,237,0.20)]">
+                <CardContent className="relative flex items-start gap-3 p-3 sm:block sm:p-6">
+                    <div className="grid h-9 w-9 shrink-0 place-items-center rounded-xl border border-white/10 bg-white/[0.08] text-sky-200 shadow-[0_10px_30px_rgba(56,189,248,0.08)] transition duration-500 group-hover:scale-110 group-hover:rotate-3 group-hover:border-sky-300/40 group-hover:bg-sky-400/15 group-hover:text-sky-100 sm:mb-5 sm:h-12 sm:w-12 sm:rounded-2xl [.light_&]:border-sky-200/80 [.light_&]:bg-[linear-gradient(135deg,rgba(224,242,254,0.95),rgba(237,233,254,0.92))] [.light_&]:text-sky-700 [.light_&]:shadow-[0_12px_30px_rgba(14,165,233,0.16)] [.light_&]:group-hover:border-violet-300/80 [.light_&]:group-hover:bg-[linear-gradient(135deg,rgba(219,234,254,1),rgba(237,233,254,1))] [.light_&]:group-hover:text-violet-700 [.light_&]:group-hover:shadow-[0_16px_38px_rgba(124,58,237,0.20)]">
                         <Icon
-                            className="h-5 w-5 text-current drop-shadow-[0_0_10px_rgba(56,189,248,0.45)] transition duration-500 group-hover:rotate-6 group-hover:scale-110 [.light_&]:drop-shadow-[0_0_8px_rgba(14,165,233,0.35)]"
+                            className="h-4 w-4 text-current drop-shadow-[0_0_10px_rgba(56,189,248,0.45)] transition duration-500 group-hover:rotate-6 group-hover:scale-110 sm:h-5 sm:w-5 [.light_&]:drop-shadow-[0_0_8px_rgba(14,165,233,0.35)]"
                             aria-hidden="true"
                         />
                     </div>
 
-                    <h3 className="font-display text-lg font-semibold leading-snug text-white transition-colors duration-300 group-hover:text-sky-50 sm:text-xl [.light_&]:text-slate-950 [.light_&]:group-hover:text-sky-800">
-                        {label}
-                    </h3>
+                    <div className="min-w-0 flex-1">
+                        <h3 className="font-display text-sm font-semibold leading-snug text-white transition-colors duration-300 group-hover:text-sky-50 sm:text-xl [.light_&]:text-slate-950 [.light_&]:group-hover:text-sky-800">
+                            {label}
+                        </h3>
 
-                    <p className="mt-3 text-sm leading-6 text-slate-300 transition-colors duration-300 group-hover:text-slate-200 sm:text-base sm:leading-7 [.light_&]:text-slate-600 [.light_&]:group-hover:text-slate-700">
-                        {value}
-                    </p>
+                        <p className="mt-1 text-xs leading-5 text-slate-300 transition-colors duration-300 group-hover:text-slate-200 sm:mt-3 sm:text-base sm:leading-7 [.light_&]:text-slate-600 [.light_&]:group-hover:text-slate-700">
+                            {value}
+                        </p>
+                    </div>
                 </CardContent>
             </Card>
         </motion.div>
@@ -385,7 +387,7 @@ export default function About() {
                             </CardContent>
                         </Card>
 
-                        <div className="grid gap-4 sm:grid-cols-3">
+                        <div className="grid gap-3 sm:grid-cols-3 sm:gap-4">
                             {highlights.map((item, index) => (
                                 <HighlightCard
                                     key={item.label}
