@@ -42,10 +42,10 @@ export const projects = [
         name: "DigiTools",
         type: "Frontend Landing Page",
         category: "Digital Tools Landing Page",
-        description:
-            "DigiTools is a responsive React project for showcasing premium digital tools with product cards, pricing, cart behavior, and checkout feedback.",
         shortDescription:
-            "A modern digital tools website built with React. It includes product cards, pricing cards, cart item count, duplicate prevention, item removal, total price calculation, and toast feedback for checkout.",
+            "A responsive React project for showcasing premium digital tools with product cards, pricing, cart behavior, and checkout feedback.",
+        description:
+            "DigiTools is a modern digital tools website built with React. It includes product cards, pricing cards, cart item count, duplicate prevention, item removal, total price calculation, and toast feedback for checkout.",
         images: [
             "/assets/projects/digitools-1.png",
             "/assets/projects/digitools-2.png",
@@ -75,40 +75,43 @@ export const projects = [
         ]
     },
     {
-        slug: "developer-portfolio",
-        name: "Developer Portfolio",
-        type: "Full Stack Project",
-        category: "Personal Portfolio Website",
+        slug: "github-issues-tracker",
+        name: "GitHub Issues Tracker",
+        type: "Frontend JSON Web App",
+        category: "Issue Tracking Web App",
         shortDescription:
-            "A modern personal portfolio built to present skills, projects, experience, and contact information with smooth responsive design.",
+            "A clean issue tracking web app with login access, issue listing, search functionality, and dynamic issue details using API data.",
         description:
-            "This portfolio showcases personal information, technical skills, project cards, social links, and contact sections. It focuses on clean UI, smooth animations, reusable components, and strong responsive behavior.",
+            "GitHub Issues Tracker is a frontend web application designed to display and manage issue-style data in a simple, organized interface. The project includes a login screen with demo credentials, issue listing, search behavior, dynamic issue detail viewing, and API-based data handling. It helped me practice JavaScript DOM manipulation, API integration, responsive layout, user interaction, and clean frontend structure.",
         images: [
-            "/assets/projects/portfolio-1.png",
-            "/assets/projects/portfolio-2.png",
-            "/assets/projects/portfolio-3.png"
+            "/assets/projects/github-issues-tracker-1.png",
+            "/assets/projects/github-issues-tracker-2.png",
+            "/assets/projects/github-issues-tracker-3.png"
         ],
         stack: [
-            "Next.js",
-            "React.js",
+            "HTML",
+            "CSS",
+            "JavaScript",
             "Tailwind CSS",
-            "Framer Motion",
-            "Lucide React",
-            "shadcn/ui"
+            "REST API",
+            "Netlify"
         ],
-        liveLink: "#",
-        githubClient: "https://github.com/mi-araf",
+        liveLink: "https://mi-project-issues-tracker.netlify.app/",
+        githubClient: "https://github.com/mi-araf/b13-a5-github-tracker-issues",
         challenges: [
-            "Making every section responsive across mobile, tablet, and desktop.",
-            "Keeping animations smooth without making the page feel heavy.",
-            "Designing reusable cards and layouts that match the same visual system.",
-            "Balancing visual style with readability."
+            "Implementing login-based access with demo credentials in a simple and user-friendly way.",
+            "Fetching issue data from an API and displaying it clearly in the interface.",
+            "Creating search functionality so users can find issues more easily.",
+            "Managing dynamic issue details and keeping the UI organized with vanilla JavaScript.",
+            "Making the layout responsive across desktop, tablet, and mobile screens."
         ],
         improvements: [
-            "Add a blog or case study section.",
-            "Add project filtering by technology.",
-            "Add better SEO metadata for each page.",
-            "Add dark and light mode polish across all sections."
+            "Add real authentication instead of demo credential-based login.",
+            "Improve issue filtering with status, priority, category, and date-based sorting.",
+            "Add pagination or infinite scrolling for better handling of larger issue lists.",
+            "Add loading states, empty states, and better error handling for API requests.",
+            "Redesign the dashboard with improved charts, issue statistics, and cleaner visual hierarchy.",
+            "Convert the project to React or Next.js for better component structure and scalability."
         ]
     }
 ];

@@ -42,6 +42,11 @@ export default function ProjectDetailsPage({ params }) {
         notFound();
     }
 
+    const shouldShowFullScreenshot =
+        project.slug === "digitools" ||
+        project.slug === "github-issues-tracker" ||
+        project.name.toLowerCase().includes("github issues");
+
     return (
         <main className="min-h-screen bg-slate-950 text-white [.light_&]:bg-slate-50 [.light_&]:text-slate-950">
             <section className="section-padding relative overflow-hidden">
@@ -97,14 +102,23 @@ export default function ProjectDetailsPage({ params }) {
 
                         <Card className="overflow-hidden rounded-[1.75rem] border-white/10 bg-white/[0.045] [.light_&]:border-slate-200 [.light_&]:bg-white">
                             <CardContent className="p-3">
-                                <div className="relative h-[320px] overflow-hidden rounded-[1.35rem] bg-slate-900 sm:h-[420px]">
+                                <div
+                                    className={`relative overflow-hidden rounded-[1.35rem] ${shouldShowFullScreenshot
+                                        ? "aspect-[16/9] bg-white p-2 [.light_&]:bg-slate-50"
+                                        : "h-[320px] bg-slate-900 sm:h-[420px]"
+                                        }`}
+                                >
                                     <Image
                                         src={project.images[0]}
                                         alt={`${project.name} main preview`}
                                         fill
                                         priority
                                         sizes="(max-width: 1024px) 100vw, 50vw"
-                                        className="object-cover object-top"
+                                        className={
+                                            shouldShowFullScreenshot
+                                                ? "object-contain object-center"
+                                                : "object-cover object-top"
+                                        }
                                     />
                                 </div>
                             </CardContent>
@@ -135,14 +149,21 @@ export default function ProjectDetailsPage({ params }) {
                         {project.images.map((image, index) => (
                             <div
                                 key={image}
-                                className="relative h-64 overflow-hidden rounded-[1.5rem] border border-white/10 bg-white/[0.04] [.light_&]:border-slate-200 [.light_&]:bg-white"
+                                className={`relative overflow-hidden rounded-[1.5rem] border border-white/10 bg-white/[0.04] [.light_&]:border-slate-200 [.light_&]:bg-white ${shouldShowFullScreenshot
+                                        ? "aspect-[16/9] p-2"
+                                        : "h-64"
+                                    }`}
                             >
                                 <Image
                                     src={image}
                                     alt={`${project.name} screenshot ${index + 1}`}
                                     fill
                                     sizes="(max-width: 768px) 100vw, 33vw"
-                                    className="object-cover object-top"
+                                    className={
+                                        shouldShowFullScreenshot
+                                            ? "object-contain object-center"
+                                            : "object-cover object-top"
+                                    }
                                 />
                             </div>
                         ))}

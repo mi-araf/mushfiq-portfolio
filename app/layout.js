@@ -3,6 +3,7 @@ import "./globals.css";
 import ThemeProvider from "@/components/ThemeProvider";
 import SmoothScroll from "@/components/SmoothScroll";
 import GSAPScrollEffects from "@/components/GSAPScrollEffects";
+import CustomCursor from "@/components/CustomCursor";
 
 const manrope = Manrope({
     subsets: ["latin"],
@@ -26,13 +27,19 @@ export const metadata = {
         "Frontend Developer",
         "Full Stack Developer",
         "Portfolio"
-    ]
+    ],
+    icons: {
+        icon: "/araf.png",
+        shortcut: "/araf.png",
+        apple: "/araf.png"
+    }
 };
 
 export default function RootLayout({ children }) {
     return (
         <html lang="en" suppressHydrationWarning>
             <body className={`${manrope.variable} ${sora.variable} font-sans bg-background text-foreground antialiased`}>
+                <CustomCursor />
                 <ThemeProvider>
                     <SmoothScroll />
                     <GSAPScrollEffects />
