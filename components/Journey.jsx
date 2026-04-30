@@ -40,6 +40,12 @@ const milestones = [
         title: "Building premium web experiences",
         icon: Rocket,
         copy: "Focused on shipping modern interfaces that feel refined, fast, accessible, and visually alive across every screen size."
+    },
+    {
+        year: "Next Level Plans",
+        title: "Future Goals & Next Level Plans",
+        icon: TrendingUp,
+        copy: "Planning to build stronger full-stack projects, improve my problem-solving skills, explore real-world development workflows, and grow into a developer who can create useful, polished, and scalable digital products."
     }
 ];
 
