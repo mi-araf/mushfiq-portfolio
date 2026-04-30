@@ -10,7 +10,8 @@ import {
     Rocket,
     Shapes,
     Sparkles,
-    TerminalSquare
+    TerminalSquare,
+    TrendingUp
 } from "lucide-react";
 import { motion, useScroll, useSpring } from "framer-motion";
 
