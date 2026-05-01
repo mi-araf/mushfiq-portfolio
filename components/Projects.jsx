@@ -60,6 +60,7 @@ function TechBadge({ tech }) {
 function ProjectImageSlider({ images, name, slug }) {
     const [activeImage, setActiveImage] = useState(0);
     const [isHovered, setIsHovered] = useState(false);
+    const [imageLoaded, setImageLoaded] = useState(false);
 
     const projectKey = `${slug || ""} ${name || ""}`.toLowerCase();
 
@@ -68,7 +69,7 @@ function ProjectImageSlider({ images, name, slug }) {
         (projectKey.includes("github") && projectKey.includes("issue"));
 
     useEffect(() => {
-        if (!isHovered || !images || images.length <= 1) return;
+        if (!isHovered || !images || images.length <= 1) return undefined;
 
         const interval = setInterval(() => {
             setActiveImage((current) => (current + 1) % images.length);
@@ -77,9 +78,15 @@ function ProjectImageSlider({ images, name, slug }) {
         return () => clearInterval(interval);
     }, [isHovered, images]);
 
+    useEffect(() => {
+        setImageLoaded(false);
+    }, [activeImage]);
+
     if (!images || images.length === 0) {
         return null;
     }
+
+    const currentImage = images[activeImage];
 
     return (
         <div
@@ -96,27 +103,39 @@ function ProjectImageSlider({ images, name, slug }) {
             {shouldCenterFullScreenshot ? (
                 <div className="relative h-full w-full overflow-hidden rounded-[1.1rem] bg-[radial-gradient(circle_at_20%_20%,rgba(56,189,248,0.10),transparent_28%),radial-gradient(circle_at_80%_80%,rgba(168,85,247,0.10),transparent_30%)] [.light_&]:bg-[radial-gradient(circle_at_20%_20%,rgba(14,165,233,0.08),transparent_28%),radial-gradient(circle_at_80%_80%,rgba(124,58,237,0.08),transparent_30%)]">
                     <div className="absolute left-1/2 top-1/2 aspect-[16/9] w-[86%] max-w-[640px] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-[1rem] border border-white/12 bg-white shadow-[0_14px_35px_rgba(0,0,0,0.22)] transition duration-500 group-hover/image:scale-[1.015] [.light_&]:border-slate-200 [.light_&]:shadow-[0_12px_28px_rgba(15,23,42,0.10)]">
+                        {!imageLoaded && (
+                            <div className="absolute inset-0 z-10 animate-pulse bg-slate-800/60 [.light_&]:bg-slate-200" />
+                        )}
+
                         <Image
-                            key={images[activeImage]}
-                            src={images[activeImage]}
+                            key={currentImage}
+                            src={currentImage}
                             alt={`${name} preview ${activeImage + 1}`}
                             fill
                             sizes="(max-width: 1024px) 100vw, 50vw"
                             quality={65}
-                            className="absolute inset-0 object-contain object-center transition-all duration-500 ease-out"
+                            onLoad={() => setImageLoaded(true)}
+                            className={`absolute inset-0 object-contain object-center transition-all duration-500 ease-out ${imageLoaded ? "opacity-100" : "opacity-0"
+                                }`}
                         />
                     </div>
                 </div>
             ) : (
                 <div className="relative h-full w-full overflow-hidden rounded-[1.05rem]">
+                    {!imageLoaded && (
+                        <div className="absolute inset-0 z-10 animate-pulse bg-slate-800/60 [.light_&]:bg-slate-200" />
+                    )}
+
                     <Image
-                        key={images[activeImage]}
-                        src={images[activeImage]}
+                        key={currentImage}
+                        src={currentImage}
                         alt={`${name} preview ${activeImage + 1}`}
                         fill
                         sizes="(max-width: 1024px) 100vw, 50vw"
                         quality={65}
-                        className="absolute inset-0 object-cover object-top transition-all duration-500 ease-out group-hover/image:scale-[1.04]"
+                        onLoad={() => setImageLoaded(true)}
+                        className={`absolute inset-0 object-cover object-top transition-all duration-500 ease-out group-hover/image:scale-[1.04] ${imageLoaded ? "opacity-100" : "opacity-0"
+                            }`}
                     />
                 </div>
             )}
@@ -194,6 +213,7 @@ function ProjectCard({ project, index }) {
                         <ProjectImageSlider
                             images={project.images}
                             name={project.name}
+                            index={index}
                             slug={project.slug}
                         />
                     </div>

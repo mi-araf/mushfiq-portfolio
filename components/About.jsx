@@ -186,11 +186,31 @@ function HighlightCard({ icon: Icon, label, value, index }) {
 
 export default function About() {
     const [activeTab, setActiveTab] = useState(aboutTabs[0].id);
+    const [aboutCardGlow, setAboutCardGlow] = useState({
+        x: 50,
+        y: 50,
+    });
 
     const activeContent =
         aboutTabs.find((tab) => tab.id === activeTab) || aboutTabs[0];
 
     const ActiveIcon = activeContent.icon;
+
+    const handleAboutCardMouseMove = (event) => {
+        const rect = event.currentTarget.getBoundingClientRect();
+
+        setAboutCardGlow({
+            x: ((event.clientX - rect.left) / rect.width) * 100,
+            y: ((event.clientY - rect.top) / rect.height) * 100,
+        });
+    };
+
+    const resetAboutCardGlow = () => {
+        setAboutCardGlow({
+            x: 50,
+            y: 50,
+        });
+    };
 
     return (
         <section id="about" className="section-padding relative">
@@ -344,7 +364,7 @@ export default function About() {
                                 <span className="pointer-events-none absolute -bottom-16 left-12 h-40 w-40 rounded-full bg-violet-500/10 blur-3xl" />
 
                                 <AnimatePresence mode="wait">
-                                    <motion.div
+                                    {/* <motion.div
                                         key={activeContent.id}
                                         initial={{
                                             opacity: 0,
@@ -382,7 +402,79 @@ export default function About() {
                                         <p className="mt-5 text-base leading-8 text-muted-foreground sm:text-lg">
                                             {activeContent.content}
                                         </p>
+                                    </motion.div> */}
+                                    <motion.div
+                                        initial={false}
+                                        whileHover={{
+                                            y: -5,
+                                        }}
+                                        transition={{
+                                            type: "spring",
+                                            stiffness: 240,
+                                            damping: 24,
+                                            mass: 0.7,
+                                        }}
+                                        onMouseMove={handleAboutCardMouseMove}
+                                        onMouseLeave={resetAboutCardGlow}
+                                        className="group/about-card relative"
+                                    >
+                                        <Card className="cursor-default">
+                                            {/* Cursor-only glow */}
+                                            <span
+                                                className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover/about-card:opacity-100"
+                                                style={{
+                                                    background: `radial-gradient(420px circle at ${aboutCardGlow.x}% ${aboutCardGlow.y}%, rgba(56, 189, 248, 0.16), rgba(168, 85, 247, 0.07), transparent 45%)`,
+                                                }}
+                                            />
+
+                                            {/* Optional subtle grid texture */}
+                                            <span className="pointer-events-none absolute inset-0 opacity-[0.05] [background-image:linear-gradient(rgba(255,255,255,.7)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.7)_1px,transparent_1px)] [background-size:34px_34px] [.light_&]:opacity-[0.10]" />
+
+                                            <CardContent className="relative min-h-[390px] p-5 sm:min-h-[360px] sm:p-7">
+                                                <AnimatePresence mode="wait">
+                                                    <motion.div
+                                                        key={activeContent.id}
+                                                        initial={{
+                                                            opacity: 0,
+                                                            y: 12,
+                                                        }}
+                                                        animate={{
+                                                            opacity: 1,
+                                                            y: 0,
+                                                        }}
+                                                        exit={{
+                                                            opacity: 0,
+                                                            y: -12,
+                                                        }}
+                                                        transition={{
+                                                            duration: 0.24,
+                                                            ease: "easeOut",
+                                                        }}
+                                                        className="relative"
+                                                    >
+                                                        <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.05] px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-sky-200 sm:text-xs [.light_&]:border-slate-200 [.light_&]:bg-white/75 [.light_&]:text-sky-700">
+                                                            <ActiveIcon
+                                                                className="h-3.5 w-3.5 transition-transform duration-300 group-hover/about-card:rotate-6"
+                                                                aria-hidden="true"
+                                                            />
+
+                                                            {activeContent.fullLabel}
+                                                        </div>
+
+                                                        <h3 className="font-display text-2xl font-semibold text-white sm:text-3xl [.light_&]:text-slate-950">
+                                                            {activeContent.title}
+                                                        </h3>
+
+                                                        <p className="mt-5 text-base leading-8 text-muted-foreground sm:text-lg">
+                                                            {activeContent.content}
+                                                        </p>
+                                                    </motion.div>
+                                                </AnimatePresence>
+                                            </CardContent>
+                                        </Card>
                                     </motion.div>
+
+
                                 </AnimatePresence>
                             </CardContent>
                         </Card>

@@ -46,9 +46,9 @@ function updateMouseGlow(event) {
     );
 }
 
-function easeInOutCubic(t) {
+/* function easeInOutCubic(t) {
     return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-}
+} */
 
 export default function Navbar() {
     const router = useRouter();
@@ -59,60 +59,100 @@ export default function Navbar() {
     const [activeHref, setActiveHref] = useState("#home");
 
     const isProgrammaticScrollRef = useRef(false);
-    const animationFrameRef = useRef(null);
+    // const animationFrameRef = useRef(null);
 
-    const smoothScrollTo = useCallback((targetTop, target) => {
-        if (animationFrameRef.current) {
-            cancelAnimationFrame(animationFrameRef.current);
-        }
+    /*     const smoothScrollTo = useCallback((targetTop, target) => {
+            if (animationFrameRef.current) {
+                cancelAnimationFrame(animationFrameRef.current);
+            }
+    
+            const startTop = window.scrollY;
+            const distance = targetTop - startTop;
+            const duration = Math.min(Math.max(Math.abs(distance) * 0.55, 520), 1050);
+            const startTime = performance.now();
+    
+            isProgrammaticScrollRef.current = true;
+    
+            const animateScroll = (currentTime) => {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                const easedProgress = easeInOutCubic(progress);
+    
+                window.scrollTo(0, startTop + distance * easedProgress);
+    
+                if (progress < 1) {
+                    animationFrameRef.current = requestAnimationFrame(animateScroll);
+                    return;
+                }
+    
+                setActiveHref(target);
+    
+                window.setTimeout(() => {
+                    isProgrammaticScrollRef.current = false;
+                }, 120);
+            };
+    
+            animationFrameRef.current = requestAnimationFrame(animateScroll);
+        }, []); */
 
-        const startTop = window.scrollY;
-        const distance = targetTop - startTop;
-        const duration = Math.min(Math.max(Math.abs(distance) * 0.55, 520), 1050);
-        const startTime = performance.now();
+    /*     const scrollToSection = useCallback(
+            (target) => {
+                const section = document.querySelector(target);
+    
+                if (!section) return false;
+    
+                const navbarOffset = 92;
+                const top =
+                    section.getBoundingClientRect().top + window.scrollY - navbarOffset;
+    
+                setActiveHref(target);
+                setOpen(false);
+                smoothScrollTo(top, target);
+    
+                return true;
+            },
+            [smoothScrollTo]
+        ); */
+
+    const scrollToSection = useCallback((target) => {
+        const section = document.querySelector(target);
+
+        if (!section) return false;
+
+        const navbarOffset = 92;
+        const top = section.getBoundingClientRect().top + window.scrollY - navbarOffset;
+
+        setActiveHref(target);
+        setOpen(false);
 
         isProgrammaticScrollRef.current = true;
 
-        const animateScroll = (currentTime) => {
-            const elapsed = currentTime - startTime;
-            const progress = Math.min(elapsed / duration, 1);
-            const easedProgress = easeInOutCubic(progress);
-
-            window.scrollTo(0, startTop + distance * easedProgress);
-
-            if (progress < 1) {
-                animationFrameRef.current = requestAnimationFrame(animateScroll);
-                return;
-            }
-
+        const finishScroll = () => {
             setActiveHref(target);
 
             window.setTimeout(() => {
                 isProgrammaticScrollRef.current = false;
-            }, 120);
+            }, 180);
         };
 
-        animationFrameRef.current = requestAnimationFrame(animateScroll);
+        if (window.lenis?.scrollTo) {
+            window.lenis.scrollTo(top, {
+                duration: 1.05,
+                easing: (t) => 1 - Math.pow(1 - t, 3),
+                onComplete: finishScroll,
+            });
+        } else {
+            window.scrollTo({
+                top,
+                behavior: "smooth",
+            });
+
+            window.setTimeout(finishScroll, 900);
+        }
+
+        return true;
     }, []);
 
-    const scrollToSection = useCallback(
-        (target) => {
-            const section = document.querySelector(target);
-
-            if (!section) return false;
-
-            const navbarOffset = 92;
-            const top =
-                section.getBoundingClientRect().top + window.scrollY - navbarOffset;
-
-            setActiveHref(target);
-            setOpen(false);
-            smoothScrollTo(top, target);
-
-            return true;
-        },
-        [smoothScrollTo]
-    );
 
     const handleNavClick = (event, target) => {
         event.preventDefault();
@@ -157,10 +197,6 @@ export default function Navbar() {
 
         return () => {
             window.removeEventListener("scroll", onScroll);
-
-            if (animationFrameRef.current) {
-                cancelAnimationFrame(animationFrameRef.current);
-            }
         };
     }, []);
 
@@ -211,8 +247,8 @@ export default function Navbar() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.55, ease: "easeOut" }}
                 className={`container group/nav relative flex items-center justify-between overflow-hidden rounded-full border px-4 py-3 transition-all duration-500 ${scrolled
-                        ? "border-white/10 bg-background/68 shadow-card backdrop-blur-2xl [.light_&]:border-slate-200/90 [.light_&]:bg-white/75 [.light_&]:shadow-[0_16px_45px_rgba(30,41,59,0.08)]"
-                        : "border-transparent bg-transparent"
+                    ? "border-white/10 bg-background/68 shadow-card backdrop-blur-2xl [.light_&]:border-slate-200/90 [.light_&]:bg-white/75 [.light_&]:shadow-[0_16px_45px_rgba(30,41,59,0.08)]"
+                    : "border-transparent bg-transparent"
                     }`}
                 aria-label="Main navigation"
             >
@@ -258,7 +294,7 @@ export default function Navbar() {
                     <motion.span
                         whileHover={{ x: 2 }}
                         transition={hoverTransition}
-                        className="block text-lg font-bold tracking-wide text-white transition duration-300 group-hover/logo:text-sky-200 sm:text-lg [.light_&]:text-slate-900 [.light_&]:group-hover/logo:text-sky-700"
+                        className="hidden text-lg font-bold tracking-wide text-white transition duration-300 group-hover/logo:text-sky-200 sm:block [.light_&]:text-slate-900 [.light_&]:group-hover/logo:text-sky-700"
                     >
                         Araf
                     </motion.span>
@@ -282,8 +318,8 @@ export default function Navbar() {
                                 whileTap={{ scale: 0.96 }}
                                 transition={hoverTransition}
                                 className={`focus-ring group/link relative overflow-hidden rounded-full px-4 py-2 text-sm transition-colors duration-300 ${isActive
-                                        ? "text-white [.light_&]:text-sky-700"
-                                        : "text-muted-foreground hover:text-foreground"
+                                    ? "text-white [.light_&]:text-sky-700"
+                                    : "text-muted-foreground hover:text-foreground"
                                     }`}
                             >
                                 {isActive && (
@@ -408,8 +444,8 @@ export default function Navbar() {
                                             whileHover={{ x: 5, scale: 1.01 }}
                                             whileTap={{ scale: 0.98 }}
                                             className={`focus-ring group/mobile-link relative overflow-hidden rounded-2xl px-4 py-3 text-sm transition-colors duration-300 ${isActive
-                                                    ? "text-white [.light_&]:text-sky-700"
-                                                    : "text-muted-foreground hover:text-foreground"
+                                                ? "text-white [.light_&]:text-sky-700"
+                                                : "text-muted-foreground hover:text-foreground"
                                                 }`}
                                         >
                                             {isActive && (

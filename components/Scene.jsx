@@ -184,7 +184,7 @@ function Rocket({ reactionRef }) {
     return (
         <group ref={rocketRef} rotation={[0.12, -0.35, -0.12]} scale={0.78}>
             <mesh position={[0, 0, 0]}>
-                <cylinderGeometry args={[0.42, 0.5, 2.2, 56]} />
+                <cylinderGeometry args={[0.42, 0.5, 2.2, 30]} />
                 <meshStandardMaterial
                     color="#e2e8f0"
                     metalness={0.55}
@@ -198,7 +198,7 @@ function Rocket({ reactionRef }) {
             </mesh>
 
             <mesh position={[0, 1.35, 0]}>
-                <coneGeometry args={[0.43, 0.9, 56]} />
+                <coneGeometry args={[0.43, 0.9, 30]} />
                 <meshStandardMaterial
                     color="#38bdf8"
                     metalness={0.35}

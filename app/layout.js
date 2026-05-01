@@ -1,9 +1,10 @@
 import { Manrope, Sora } from "next/font/google";
+
 import "./globals.css";
 import ThemeProvider from "@/components/ThemeProvider";
-import SmoothScroll from "@/components/SmoothScroll";
-import GSAPScrollEffects from "@/components/GSAPScrollEffects";
+import ClientEffects from "@/components/ClientEffects";
 import CustomCursor from "@/components/CustomCursor";
+import GSAPScrollEffects from "@/components/GSAPScrollEffects";
 
 const manrope = Manrope({
     subsets: ["latin"],
@@ -26,22 +27,24 @@ export const metadata = {
         "Creative Web Developer",
         "Frontend Developer",
         "Full Stack Developer",
-        "Portfolio"
+        "Portfolio",
     ],
     icons: {
         icon: "/araf.png",
         shortcut: "/araf.png",
-        apple: "/araf.png"
-    }
+        apple: "/araf.png",
+    },
 };
 
 export default function RootLayout({ children }) {
     return (
         <html lang="en" suppressHydrationWarning>
-            <body className={`${manrope.variable} ${sora.variable} font-sans bg-background text-foreground antialiased`}>
+            <body
+                className={`${manrope.variable} ${sora.variable} font-sans bg-background text-foreground antialiased`}
+            >
                 <CustomCursor />
                 <ThemeProvider>
-                    <SmoothScroll />
+                    <ClientEffects />
                     <GSAPScrollEffects />
                     {children}
                 </ThemeProvider>
